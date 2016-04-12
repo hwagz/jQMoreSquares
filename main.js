@@ -37,6 +37,7 @@ $(document).ready(function(){
       this.$q2.on('click',this.colorSwap.bind(this.$q2));
       this.$q3.on('click',this.colorSwap.bind(this.$q3));
       this.$q4.on('click',this.colorSwap.bind(this.$q4));
+      this.$window.on('resize',this.resizeSquares.bind(this));
 
     },
     centerElement: function($el){
@@ -91,6 +92,12 @@ $(document).ready(function(){
       var color = this.css("background-color");
       this.css({backgroundColor: squares.$center.css("background-color")});
       squares.$center.css({backgroundColor: color});
+    },
+    resizeSquares: function(){
+      this.centerElement(this.$center);
+      this.quadSize();
+      this.quadPositions();
+
     }
   };
   squares.init();
