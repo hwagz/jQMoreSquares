@@ -1,0 +1,35 @@
+body{
+
+}
+
+#center{
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  background-color: black;
+  z-index: 5;
+}
+
+.quad{
+  position: absolute;
+  z-index: 1;
+}
+
+#q0{
+  background-color: aqua;
+}
+#q1{
+  background-color: red;
+}
+
+#q2{
+  background-color: fuchsia;
+}
+
+#q3{
+  background-color: orange;
+}
+
+#q4{
+  background-color: chartreuse;
+}
