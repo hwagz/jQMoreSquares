@@ -25,13 +25,12 @@ $(document).ready(function(){
       this.$body = $('body');
     },
     bindEvents: function(){
-      //change to q#
+      // Event handlers for clicks and mouseenter/leave
       this.$q0.on('mouseenter',this.grow.bind(this.$q0)).on('mouseleave',this.shrink.bind(this.$q0));
       this.$q1.on('mouseenter',this.grow.bind(this.$q1)).on('mouseleave',this.shrink.bind(this.$q1));
       this.$q2.on('mouseenter',this.grow.bind(this.$q2)).on('mouseleave',this.shrink.bind(this.$q2));
       this.$q3.on('mouseenter',this.grow.bind(this.$q3)).on('mouseleave',this.shrink.bind(this.$q3));
       this.$q4.on('mouseenter',this.grow.bind(this.$q4)).on('mouseleave',this.shrink.bind(this.$q4));
-      //change to q#
       this.$q0.on('click',this.colorSwap.bind(this.$q0));
       this.$q1.on('click',this.colorSwap.bind(this.$q1));
       this.$q2.on('click',this.colorSwap.bind(this.$q2));
@@ -41,25 +40,23 @@ $(document).ready(function(){
 
     },
     centerElement: function($el){
-      // needs a bit more functionality, want to make the center a % of screen size
+      // Makes center size and position a % of the window
       var heightSize = this.$window.height()*.7;
       var widthSize = this.$window.width()*.7;
       $el.css({height:heightSize,width:widthSize});
       var desiredy = this.$window.height()*.05;
       var desiredx = this.$window.width()/2-$el.width()/2;
-      //var desiredy = this.$window.height()/2-$el.height()/2;
       $el.css({left:desiredx,top:desiredy});
     },
     quadSize: function(){
-
-      //this is now how much space is left for the quads
+      // Determines how big the smaller panes need to be
       this.quadSpacing = this.$window.width()-(100+(this.$window.width()%100));
       this.quadWidth = this.quadSpacing/this.numQuads;
       var quadHeight = this.$window.height()*.15;
       this.$quad.css({height:quadHeight,width:this.quadWidth});
     },
     quadPositions: function(){
-      //now it's the space left for the spacing
+      // Determines where they should be positioned
       var desiredy = this.$window.height()*.8;
       this.quadSpacing = (this.$window.width()-this.quadSpacing)/(this.numQuads+1);
       for (var i = 0; i < this.numQuads; i++) {
@@ -71,6 +68,7 @@ $(document).ready(function(){
       }
     },
     grow: function(){
+      // Mouseover grow for smaller panes
       this.css({zIndex:6});
       this.animate({
         width: "+="+squares.growth+"px",
@@ -80,6 +78,7 @@ $(document).ready(function(){
       }, squares.growTime);
     },
     shrink: function(){
+      // Mouseleave shrink for smaller panes
       this.animate({
         width: "-="+squares.growth+"px",
         height:"-="+squares.growth+"px",
@@ -89,11 +88,13 @@ $(document).ready(function(){
       this.css({zIndex:1});
     },
     colorSwap: function(){
+      // Swaps clicked small panel with center panel color
       var color = this.css("background-color");
       this.css({backgroundColor: squares.$center.css("background-color")});
       squares.$center.css({backgroundColor: color});
     },
     resizeSquares: function(){
+      // Repositions as screen is resized
       this.centerElement(this.$center);
       this.quadSize();
       this.quadPositions();
